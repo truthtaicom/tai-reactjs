@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
+import firebase from 'firebase'
+import { catchClause } from '@babel/types';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const onSubmit  = (e) => {
+  const onSubmit  = async (e) => {
     e.preventDefault()
     console.log({ email, password })
+    try {
+      const result = await firebase.auth().signInWithEmailAndPassword(email, password)
+      console.log(result)
+    } catch(error) {
+      console.log(error.message, "error")
+    }
+
   }
 
   const onChangeEmail = (e) => {
