@@ -1,25 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import result from './data.json'
+import Layout from './components/Layout';
+import ProductList from './components/ProductList';
+import LoginForm from './components/LoginForm'
+import RegisterForm from './components/RegisterForm'
+import NotFoundPage from './components/NotFoundPage'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import ProductDetail from './components/ProductDetail';
 
 function App() {
+  const [selectedItem, setSelectedItem] = useState()
+  const findSelectedItem = (productId) => {
+      const item = result.data.find(item => item.product_id === parseInt(productId,10))
+      setSelectedItem(item)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+        <Layout> 
+            <Switch>
+                <Route exact path="/" render={() => <ProductList data={result.data} />} />
+                <Route path="/login" component={LoginForm} />
+                <Route path="/register" component={RegisterForm} />
+                <Route path="/product-detail/:productId" render={
+                    (propsOfRouter) => (
+                        <ProductDetail
+                            findSelectedItem={findSelectedItem}
+                            selectedItem={selectedItem}
+                            {...propsOfRouter}
+                        />
+                    )
+                } />
+                <Route component={NotFoundPage} />
+            </Switch>
+            
+        
+            {/* <!-- Fullscreen search --> */}
+            <div className="search-wrap">
+                <div className="search-inner">
+                    <i className="fas fa-times search-close" id="search-close"></i>
+                    <div className="search-cell">
+                        <form method="get">
+                            <div className="search-field-holder">
+                                <input type="search" className="main-search-input" placeholder="Search Entire Store..." />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div> 
+            {/* <!-- end fullscreen search --> */}
+        </Layout>      
+    </Router>
   );
 }
 
