@@ -12,13 +12,19 @@ import PrivateRoute from './components/PrivateRouter';
 
 function App() {
   const [selectedItem, setSelectedItem] = useState()
+  const [isShowSearchModal, setSearchModal] = useState(true)
   const findSelectedItem = (productId) => {
       const item = result.data.find(item => item.product_id === parseInt(productId,10))
       setSelectedItem(item)
   }
+
+  const onShowSearch = () => {
+    setSearchModal((state) => !state)
+  }
+
   return (
     <Router>
-        <Layout> 
+        <Layout onShowSearch={onShowSearch}> 
             <Switch>
                 <Route exact path="/" render={() => <ProductList data={result.data} />} />
                 <Route path="/login" component={LoginForm} />
@@ -35,21 +41,22 @@ function App() {
                 <PrivateRoute component={NotFoundPage} />
             </Switch>
             
-        
-            {/* <!-- Fullscreen search --> */}
-            <div className="search-wrap">
-                <div className="search-inner">
-                    <i className="fas fa-times search-close" id="search-close"></i>
-                    <div className="search-cell">
-                        <form method="get">
-                            <div className="search-field-holder">
-                                <input type="search" className="main-search-input" placeholder="Search Entire Store..." />
-                            </div>
-                        </form>
+            {
+                isShowSearchModal &&
+                <div className="search-wrap" onClick={onShowSearch}>
+                    <div className="search-inner">
+                        <i className="fas fa-times search-close" id="search-close"></i>
+                        <div className="search-cell">
+                            <form method="get">
+                                <div className="search-field-holder">
+                                    <input type="search" className="main-search-input" placeholder="Search Entire Store..." />
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            </div> 
-            {/* <!-- end fullscreen search --> */}
+                </div> 
+            }
+            
         </Layout>      
     </Router>
   );

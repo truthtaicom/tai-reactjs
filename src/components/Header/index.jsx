@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom'
 
-export default function Header() {
+export default function Header(props) {
   return (
     <header>
       <div id="header-sticky" className="header-area box-90 sticky-header">
@@ -14,7 +14,7 @@ export default function Header() {
                 </Link>
               </div>
 
-              <div className="category-menu">
+              {/* <div className="category-menu">
                 <h4>Category</h4>
                 <ul>
                   <li>
@@ -53,7 +53,7 @@ export default function Header() {
                     </a>
                   </li>
                 </ul>
-              </div>
+              </div> */}
             </div>
             <div className="col-xl-8 col-lg-6 col-md-8 col-8 d-none d-xl-block">
               <div className="main-menu text-center">
@@ -89,15 +89,16 @@ export default function Header() {
                   <li className="search-btn">
                     <a
                       className="search-btn nav-search search-trigger"
-                      href="#"
+                      onClick={props.onShowSearch}
+                      href=""
                     >
                       <i className="fas fa-search" />
                     </a>
                   </li>
                   <li className="login-btn">
-                    <a href="#">
+                    <Link to="/login">
                       <i className="far fa-user" />
-                    </a>
+                    </Link>
                   </li>
                   <li className="d-shop-cart">
                     <a href="#">
