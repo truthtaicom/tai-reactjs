@@ -9,9 +9,9 @@ export default function Header() {
           <div className="row align-items-center">
             <div className="col-xl-2 col-lg-6 col-md-6 col-7 col-sm-5 d-flex align-items-center pos-relative">
               <div className="logo">
-                <a href="#">
+                <Link to="/">
                   <img src="./assets/logo_shop.png" alt="" />
-                </a>
+                </Link>
               </div>
 
               <div className="category-menu">

@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import firebase from 'firebase'
-import { catchClause } from '@babel/types';
 
-export default function LoginForm() {
+export default function LoginForm(props) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('') 
   const onSubmit  = async (e) => {
     e.preventDefault()
-    console.log({ email, password })
+    // console.log({ email, password })
     try {
-      const result = await firebase.auth().signInWithEmailAndPassword(email, password)
-      console.log(result)
+      await firebase.auth().signInWithEmailAndPassword(email, password)
+      props.history.push('/')
     } catch(error) {
-      console.log(error.message, "error")
+      // console.log(error.message, "error")
+      setError(error.message)
     }
 
   }
@@ -23,6 +24,10 @@ export default function LoginForm() {
 
   const onChangePassword = (e) => {
     setPassword(e.target.value)
+  }
+
+  const onRegister = () => {
+    props.history.push('/register')
   }
   
   return (
@@ -48,6 +53,7 @@ export default function LoginForm() {
               <div className="col-lg-8 offset-lg-2">
                 <div className="basic-login">
                   <h3 className="text-center mb-60">Login From Here</h3>
+                  <p className="text-danger">{error}</p>
                   <form onSubmit={onSubmit}>
                     <label htmlFor="name">Email Address <span>**</span></label>
                     <input 
@@ -69,7 +75,7 @@ export default function LoginForm() {
                     </div>
                     <button className="btn theme-btn-2 w-100">Login Now</button>
                     <div className="or-divide"><span>or</span></div>
-                    <button className="btn theme-btn w-100">Register Now</button>
+                    <button className="btn theme-btn w-100" onClick={onRegister}>Register Now</button>
                   </form>
                 </div>
               </div>

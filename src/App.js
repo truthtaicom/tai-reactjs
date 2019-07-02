@@ -8,6 +8,7 @@ import RegisterForm from './components/RegisterForm'
 import NotFoundPage from './components/NotFoundPage'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import ProductDetail from './components/ProductDetail';
+import PrivateRoute from './components/PrivateRouter';
 
 function App() {
   const [selectedItem, setSelectedItem] = useState()
@@ -22,7 +23,7 @@ function App() {
                 <Route exact path="/" render={() => <ProductList data={result.data} />} />
                 <Route path="/login" component={LoginForm} />
                 <Route path="/register" component={RegisterForm} />
-                <Route path="/product-detail/:productId" render={
+                <PrivateRoute path="/product-detail/:productId" render={
                     (propsOfRouter) => (
                         <ProductDetail
                             findSelectedItem={findSelectedItem}
@@ -31,7 +32,7 @@ function App() {
                         />
                     )
                 } />
-                <Route component={NotFoundPage} />
+                <PrivateRoute component={NotFoundPage} />
             </Switch>
             
         
