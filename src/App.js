@@ -8,7 +8,7 @@ import RegisterForm from './components/RegisterForm'
 import NotFoundPage from './components/NotFoundPage'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import ProductDetail from './components/ProductDetail';
-import PrivateRoute from './components/PrivateRouter';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const [selectedItem, setSelectedItem] = useState()
