@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
-import firebase from 'firebase'
 
 export default function LoginForm(props) {
-  console.log(props)
+
+  const { error, loading, login } = props;
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('') 
+
   const onSubmit  = async (e) => {
     e.preventDefault()
-    // console.log({ email, password })
     try {
-      await firebase.auth().signInWithEmailAndPassword(email, password)
-      props.history.push('/')
+      await login(email, password)
+      // props.history.push('/')
     } catch(error) {
-      // console.log(error.message, "error")
-      setError(error.message)
-    }
 
+    }
   }
 
   const onChangeEmail = (e) => {
@@ -74,7 +71,12 @@ export default function LoginForm(props) {
                         <a href="#">Lost your password?</a>
                       </span>
                     </div>
-                    <button className="btn theme-btn-2 w-100">Login Now</button>
+                    {
+                      loading  
+                      ? <p>Loading....</p>
+                      : <button className="btn theme-btn-2 w-100">Login Now</button>
+                    }
+
                     <div className="or-divide"><span>or</span></div>
                     <button className="btn theme-btn w-100" onClick={onRegister}>Register Now</button>
                   </form>

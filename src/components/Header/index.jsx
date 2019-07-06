@@ -103,7 +103,7 @@ export default function Header(props) {
                   <li className="d-shop-cart">
                     <a href="#">
                       <i className="fas fa-shopping-cart" />{" "}
-                      <span className="cart-count">3</span>
+                      <span className="cart-count">{props.lengthOfSelectedItem}</span>
                     </a>
                     <ul className="minicart">
                       <li>

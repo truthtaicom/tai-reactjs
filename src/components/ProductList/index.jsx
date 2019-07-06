@@ -1,6 +1,10 @@
 import React from "react";
 import ProductItem from '../ProductItem'
 export default function ProductList(props) {
+  console.log(props)
+  const addItem = (item) => {
+    props.addItemToCart(item)
+  }
   return (
     <main>
       {/*  <!-- shop-area start --> */}
@@ -27,7 +31,7 @@ export default function ProductList(props) {
                   <div className="row">
                     {
                       props.data.map(product => (
-                        <ProductItem {...product} />
+                        <ProductItem addItem={addItem} {...product} />
                       ))
                     }
                     

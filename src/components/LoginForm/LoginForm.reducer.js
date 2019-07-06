@@ -17,12 +17,14 @@ export default function loginReducer(state = initialState, action) {
     case LOGIN_SUCCESS:
       return {
         ...state,
+        loading: false,
         data: action.payload
       }
 
     case LOGIN_FAILURE:
       return {
         ...state,
+        loading: false,
         error: action.error
       }
   

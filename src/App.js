@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import result from './data.json'
 import Layout from './components/Layout';
-import ProductList from './components/ProductList';
+import ProductList from './components/ProductList/ProductList.container';
 import LoginForm from './components/LoginForm/LoginForm.container'
 import RegisterForm from './components/RegisterForm'
 import NotFoundPage from './components/NotFoundPage'

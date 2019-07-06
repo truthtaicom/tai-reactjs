@@ -2,6 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default function ProductItem(props) {
+  const onAddItemToCart = () => {
+    props.addItem(props)
+  }
   return (
     <div className="col-xl-4 col-lg-6 col-md-6">
                       <div className="product-wrapper mb-50">
@@ -15,7 +18,7 @@ export default function ProductItem(props) {
                             />
                           </Link>
                           <div className="product-action text-center">
-                            <a href="#" title="Shoppingb Cart">
+                            <a onClick={onAddItemToCart}>
                               <i className="fas fa-shopping-cart" />
                             </a>
                             <Link to={`product-detail/${props.product_id}`}>
