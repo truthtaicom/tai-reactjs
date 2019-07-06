@@ -3,7 +3,7 @@ import './App.css';
 import result from './data.json'
 import Layout from './components/Layout';
 import ProductList from './components/ProductList';
-import LoginForm from './components/LoginForm'
+import LoginForm from './components/LoginForm/LoginForm.container'
 import RegisterForm from './components/RegisterForm'
 import NotFoundPage from './components/NotFoundPage'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'

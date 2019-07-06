@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import firebase from 'firebase'
 
 export default function LoginForm(props) {
+  console.log(props)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('') 
